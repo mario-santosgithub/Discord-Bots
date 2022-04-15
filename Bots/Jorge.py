@@ -6,7 +6,6 @@ from discord.utils import get
 from discord.ext import commands
 
 PREFIX = '.'
-TOKEN = 'OTY0MjEwNzE2NjI4MzYxMjM2.YlhVNQ.vQNl3kI_hVS2ghm-FiyG0wi8b7k'
 
 bot = commands.Bot(command_prefix=PREFIX, description="O Jorge")
 
