@@ -3,22 +3,39 @@ import asyncio
 import requests
 from discord import Member
 from discord.utils import get
-from discord.ext import commands
+from discord.ext import commands, tasks
+from random import choice
+import youtube_dl
 
-PREFIX = '.'
+import music
+
+cogs = [music]
+
+
+
+
+PREFIX = '!'
+
 
 bot = commands.Bot(command_prefix=PREFIX, description="O Jorge")
 
+status = ['Status1', 'Status2', 'Status3']
+
+for i in range(len(cogs)):
+    cogs[i].setup(bot)
+
+#remove the default help command so that we can write out own
+bot.remove_command('help')
+
 @bot.event
 async def on_ready():
+    change_status.start()
     print('Logged in as {0.user}'.format(bot))
 
 
 @bot.event
 async def on_raw_reaction_add(payload):
     msgId = 964321005055119380
-    
-    
 
     if msgId == payload.message_id:
         member = payload.member
@@ -56,5 +73,10 @@ async def roles(ctx):
 
     for i in range(len(emojis)):
         await msg.add_reaction(emojis[i])
+
+@tasks.loop(seconds=20)
+async def change_status():
+    await bot.change_presence(activity=discord.Game(choice(status)))
+
 
 bot.run(TOKEN)
