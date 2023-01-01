@@ -6,15 +6,26 @@ from random import choice
 from keep_alive import keep_alive
 from config import *
 
+intents = discord.Intents.all()
+intents.members = True
+intents.typing = True
+intents.presences = True
+intents.message_content = True
 
 status = [status1, status2, status3]
 
-bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=discord.Intents.default())
+bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=intents)
 
 @bot.event
 async def on_ready():
     change_status.start()
     print('Logged in as {0.user}'.format(bot))
+
+
+@bot.command(pass_context=True)
+async def hello(ctx):
+    print("here")
+    await ctx.channel.send("Hello :D")
 
 
 @bot.event
