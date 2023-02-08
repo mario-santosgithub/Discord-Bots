@@ -5,6 +5,8 @@ from discord.ext import commands, tasks
 from random import choice
 from keep_alive import keep_alive
 from config import *
+import os
+import openai
 
 intents = discord.Intents.all()
 intents.members = True
@@ -13,6 +15,7 @@ intents.presences = True
 intents.message_content = True
 
 status = [status1, status2, status3]
+
 
 bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=intents)
 
@@ -26,6 +29,41 @@ async def on_ready():
 async def hello(ctx):
     print("here")
     await ctx.channel.send("Hello :D")
+
+
+@bot.command(pass_context=True)
+async def ai(ctx, *message):
+    author = ctx.message.author.id
+    
+
+    message = ' '.join(message)
+
+    bot_response = "```python{}```".format(chatgpt_response(prompt=message))
+    
+    finalMsg = discord.Embed(
+        title="Input: {}".format(message),
+        description= bot_response,
+        url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
+        color = 16677215
+    )
+    await ctx.channel.send(ctx.message.author.mention)
+    await ctx.channel.send(embed=finalMsg)
+
+
+openai.api_key = CHATGPT_API_KEY
+
+def chatgpt_response(prompt):
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=1,
+        max_tokens=2049
+    )
+    print(response)
+    response_dic = response.get("choices")
+    if response_dic and len(response_dic) > 0:
+        prompt_response = response_dic[0]["text"]
+    return prompt_response
 
 
 @bot.event
