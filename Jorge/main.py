@@ -76,25 +76,41 @@ async def on_raw_reaction_add(payload):
 
         emoji = payload.emoji.name
 
-        if emoji == '1️⃣':
+        if emoji == '0️⃣':
+            role = discord.utils.get(guild.roles, name="IPS")
+
+        if emoji == '0️⃣0️⃣':
+            role = discord.utils.get(guild.roles, name="IST")
+
+        if emoji == '0️⃣1️⃣':
             role = discord.utils.get(guild.roles, name="Minecraft")
 
-        if emoji == '2️⃣':
+        if emoji == '0️⃣2️⃣':
             role = discord.utils.get(guild.roles, name="LOL")
 
-        if emoji == '3️⃣':
+        if emoji == '0️⃣3️⃣':
             role = discord.utils.get(guild.roles, name="Fortnite")
 
-        if emoji == '4️⃣':
+        if emoji == '0️⃣4️⃣':
             role = discord.utils.get(guild.roles, name="Genshin Impact")
 
-        if emoji == '5️⃣':
+        if emoji == '0️⃣5️⃣':
             role = discord.utils.get(guild.roles, name="Valorant")
 
-        if emoji == '6️⃣':
+        if emoji == '0️⃣6️⃣':
             role = discord.utils.get(guild.roles, name="Yu-gi-oh")  
-        if emoji == '7️⃣':
+            
+        if emoji == '0️⃣7️⃣':
             role = discord.utils.get(guild.roles, name="Rocket League")  
+            
+        if emoji == '0️⃣8️⃣':
+            role = discord.utils.get(guild.roles, name="")  
+            
+        if emoji == '0️⃣9️⃣':
+            role = discord.utils.get(guild.roles, name="")  
+            
+        if emoji == '1️⃣0️⃣':
+            role = discord.utils.get(guild.roles, name="")  
       
         await member.add_roles(role)
         role = discord.utils.get(guild.roles, name="Gamer")
@@ -104,17 +120,31 @@ async def on_raw_reaction_add(payload):
 @bot.command(pass_context=True)
 async def roles(ctx):
 
-    emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣']
+    emojis = ['0️⃣1️⃣', '0️⃣2️⃣', '0️⃣3️⃣', '0️⃣4️⃣', '0️⃣5️⃣', '0️⃣6️⃣', '0️⃣7️⃣']
 
     embed = discord.Embed(
         title="Escolhe aqui as tuas roles (Não cliques no nome)",
-        description='''1- Minecraft
-        2- League of Lasagna
-        3- Fortnite
-        4- Genshin Impact
-        5- Valorant
-        6- Yu-Gi-Oh
-        7- Rocket League
+        description='''0- IPS
+        00- IST
+        RIOT:
+        02- League of Lasagna
+        05- Valorant
+        EPIC GAMES:
+        03- Fortnite
+        04- Genshin Impact
+        06- Yu-Gi-Oh
+        07- Rocket League
+        Microsoft/XBOX:
+        01- Minecraft
+        Bandai:
+        EA:
+        08- Need for Speed
+        ETC:
+        09- MMO
+        10- RPG
+        11- MMORPG
+        13- M4-people
+        14- M8+/-people
         ''',
         url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
         color = 16677215
