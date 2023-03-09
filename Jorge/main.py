@@ -123,32 +123,25 @@ async def roles(ctx):
     emojis = ['0️⃣1️⃣', '0️⃣2️⃣', '0️⃣3️⃣', '0️⃣4️⃣', '0️⃣5️⃣', '0️⃣6️⃣', '0️⃣7️⃣']
 
     embed = discord.Embed(
-        title="Escolhe aqui as tuas roles (Não cliques no nome)",
-        description='''0- IPS
-        00- IST
-        RIOT:
-        02- League of Lasagna
-        05- Valorant
-        EPIC GAMES:
-        03- Fortnite
-        04- Genshin Impact
-        06- Yu-Gi-Oh
-        07- Rocket League
-        Microsoft/XBOX:
+        title="Escolhe aqui as tuas roles de jogos (Não cliques no nome)",
+        description='''
         01- Minecraft
-        Bandai:
-        EA:
+        02- League of Lasagna
+        03- Valorant
+        04- Fortnite
+        06- Rocket League
+        07- Yu-Gi-Oh
         08- Need for Speed
-        ETC:
-        09- MMO
-        10- RPG
-        11- MMORPG
-        13- M4-people
-        14- M8+/-people
+        09- Genshin Impact
+        10- Mosnter Hunter
+        11- Albion
+        12- New World
+        13- Lost Ark
+        14- World of Warcraft
         ''',
         url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
         color = 16677215
-    )
+    )# M4-people  M8+/-people
     msg = await ctx.channel.send(embed=embed)
 
     for i in range(len(emojis)):
