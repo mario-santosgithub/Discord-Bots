@@ -123,7 +123,7 @@ async def roles(ctx):
     emojis = ['0️⃣1️⃣', '0️⃣2️⃣', '0️⃣3️⃣', '0️⃣4️⃣', '0️⃣5️⃣', '0️⃣6️⃣', '0️⃣7️⃣']
 
     embed = discord.Embed(
-        title="Escolhe aqui as tuas roles de jogos (Não cliques no nome)",
+        title="Escolhe aqui as tuas roles de jogos (Não cliques no nome, pois vais adorar)",
         description='''
         01- Minecraft
         02- League of Lasagna
@@ -131,13 +131,15 @@ async def roles(ctx):
         04- Fortnite
         06- Rocket League
         07- Yu-Gi-Oh
-        08- Need for Speed
-        09- Genshin Impact
-        10- Mosnter Hunter
-        11- Albion
-        12- New World
-        13- Lost Ark
-        14- World of Warcraft
+        08- Hearthstone
+        09- Need for Speed
+        10- FIFA
+        11- Genshin Impact
+        12- Mosnter Hunter
+        13- Albion
+        14- New World
+        15- Lost Ark
+        16- World of Warcraft
         ''',
         url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
         color = 16677215
