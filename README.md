@@ -20,4 +20,4 @@ Sets the roles message to select with emojis, some internal stuff needs to be mo
 ```
 
 ## Last words
-Jorge was made with ❤️.
+Jorge was made with ❤️
