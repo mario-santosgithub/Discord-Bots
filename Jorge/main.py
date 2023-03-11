@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=intents
 
 
 '''
-Print in the terminal when the bot is ready
+Send a notification when the bot is ready
 '''
 @bot.event
 async def on_ready():
