@@ -21,7 +21,7 @@ Sets the roles message to select with emojis, some internal stuff needs to be mo
 
 # Special thanks
 Jorge was made with ❤️ by these people (discord names):
-```java
+```python
 Mri
 Maryu
 Irus0u
