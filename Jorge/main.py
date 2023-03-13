@@ -7,6 +7,8 @@ from keep_alive import keep_alive
 from config import *
 import os
 import openai
+import discord.ui
+from discord.ui import View, Button, Select
 
 intents = discord.Intents.all()
 intents.members = True
@@ -74,66 +76,64 @@ def chatgpt_response(prompt):
         prompt_response = response_dic[0]["text"]
     return prompt_response
 
-'''
-Function that adds the emojis to the Roles command
-'''
-@bot.event
-async def on_raw_reaction_add(payload):
-    msgId = 983667995203239947
 
-    if msgId == payload.message_id:
-        member = payload.member
-        guild = member.guild
-
-        emoji = payload.emoji.name
-
-        if emoji == '1️⃣':
-            role = discord.utils.get(guild.roles, name="Minecraft")
-
-        if emoji == '2️⃣':
-            role = discord.utils.get(guild.roles, name="LOL")
-
-        if emoji == '3️⃣':
-            role = discord.utils.get(guild.roles, name="Fortnite")
-
-        if emoji == '4️⃣':
-            role = discord.utils.get(guild.roles, name="Genshin Impact")
-
-        if emoji == '5️⃣':
-            role = discord.utils.get(guild.roles, name="Valorant")
-
-        if emoji == '6️⃣':
-            role = discord.utils.get(guild.roles, name="Yu-gi-oh")  
-        if emoji == '7️⃣':
-            role = discord.utils.get(guild.roles, name="Rocket League")  
-      
-        await member.add_roles(role)
-        role = discord.utils.get(guild.roles, name="Gamer")
-        await member.add_roles(role)
 
 
 @bot.command(pass_context=True)
 async def roles(ctx):
+    gameRoles = Button(label="Jogos", style=discord.ButtonStyle.green)
+    gameRoles.callback = callbackGames
 
-    emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣']
+    uniRoles = Button(label="Universidade", style=discord.ButtonStyle.blurple)
+    
 
-    embed = discord.Embed(
-        title="Escolhe aqui as tuas roles (Não cliques no nome)",
-        description='''1- Minecraft
-        2- League of Lasagna
-        3- Fortnite
-        4- Genshin Impact
-        5- Valorant
-        6- Yu-Gi-Oh
-        7- Rocket League
-        ''',
-        url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
-        color = 16677215
-    )
-    msg = await ctx.channel.send(embed=embed)
+    view = View(timeout=None)
+    view.add_item(gameRoles)
+    view.add_item(uniRoles)
+    await ctx.send("Select Options", view=view)
 
-    for i in range(len(emojis)):
-        await msg.add_reaction(emojis[i])
+
+async def callbackGames(interaction):
+    
+    select = Select(options=[
+        discord.SelectOption(label="Minecraft", value="01", description="This will open"),
+        discord.SelectOption(label="League of Lasagna", value="02", description="This will open2"),
+        discord.SelectOption(label="Valorant", value="03", description="This will open2"),
+        discord.SelectOption(label="Counter Strike", value="04", description="This will open2"),
+        discord.SelectOption(label="Fortnite", value="05", description="This will open2"),
+        discord.SelectOption(label="Rocket League", value="06", description="This will open2"),
+        discord.SelectOption(label="Yu-Gi-Oh", value="07", description="This will open2"),
+        discord.SelectOption(label="HearthStone", value="08", description="This will open2"),
+        discord.SelectOption(label="Need For Speed", value="09", description="This will open2"),
+        discord.SelectOption(label="FIFA", value="10", description="This will open2"),
+        discord.SelectOption(label="Genshin Impact", value="11", description="This will open2"),
+        discord.SelectOption(label="Monster Hunter", value="12", description="This will open2"),
+        discord.SelectOption(label="Albion", value="13", description="This will open2"),
+        discord.SelectOption(label="New World", value="14", description="This will open2"),
+        discord.SelectOption(label="Lost Ark", value="15", description="This will open2"),
+        discord.SelectOption(label="World Of Warcraft", value="16", description="This will open2"),
+        discord.SelectOption(label="Stradew Valley", value="17", description="This will open2")
+    ])  
+
+
+    async def newCallbackGames(interaction):
+        member = interaction.user    
+        guild = member.guild
+
+        newRole = rolesList.get(select.values[0])
+        role = discord.utils.get(guild.roles, name=newRole)
+
+        await member.add_roles(role)
+        await interaction.response.send_message("Já está :D", ephemeral=True)
+
+    
+    select.callback = newCallbackGames
+    view = View(timeout=None)
+    view.add_item(select)
+    await interaction.response.send_message("Escolhe uma opção", view=view, ephemeral=True)
+
+
+    return
 
 '''
 Change the status 
