@@ -19,5 +19,9 @@ Sets the roles message to select with emojis, some internal stuff needs to be mo
 !roles
 ```
 
-## Last words
-Jorge was made with ❤️
+# Special thanks
+Jorge was made with ❤️ by these people (discord names):
+
+Mri
+Maryu
+Irus0u
