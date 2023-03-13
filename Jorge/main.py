@@ -19,18 +19,26 @@ status = [status1, status2, status3]
 bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=intents)
 
 
+'''
+Send a notification when the bot is ready
+'''
 @bot.event
 async def on_ready():
     change_status.start()
     print('Logged in as {0.user}'.format(bot))
 
 
+'''
+Return a Hello messaga, it's mostly for debug
+'''
 @bot.command(pass_context=True)
 async def hello(ctx):
     print("here")
     await ctx.channel.send("Hello :D")
 
-
+'''
+The AI function
+'''
 @bot.command(pass_context=True)
 async def ai(ctx, *message):
     author = ctx.message.author.id
@@ -65,7 +73,9 @@ def chatgpt_response(prompt):
         prompt_response = response_dic[0]["text"]
     return prompt_response
 
-
+'''
+Function that adds the emojis to the Roles command
+'''
 @bot.event
 async def on_raw_reaction_add(payload):
     msgId = 983667995203239947
@@ -134,11 +144,13 @@ async def roles(ctx):
     for i in range(len(emojis)):
         await msg.add_reaction(emojis[i])
 
-
+'''
+Change the status 
+'''
 @tasks.loop(seconds=20)
 async def change_status():
     await bot.change_presence(activity=discord.Game(choice(status)))
 
-
+# Keep alive and run the bot
 keep_alive()
 bot.run(TOKEN)
