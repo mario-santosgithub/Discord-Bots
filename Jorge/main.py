@@ -16,8 +16,8 @@ intents.message_content = True
 
 status = [status1, status2, status3]
 
-
 bot = commands.Bot(command_prefix=PREFIX, description="O Jorge", intents=intents)
+
 
 @bot.event
 async def on_ready():
@@ -34,23 +34,23 @@ async def hello(ctx):
 @bot.command(pass_context=True)
 async def ai(ctx, *message):
     author = ctx.message.author.id
-    
 
     message = ' '.join(message)
 
     bot_response = "```python{}```".format(chatgpt_response(prompt=message))
-    
+
     finalMsg = discord.Embed(
         title="Input: {}".format(message),
-        description= bot_response,
-        url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
-        color = 16677215
+        description=bot_response,
+        url='https://www.youtube.com/watch?v=Yt6PPkTDsWg',
+        color=16677215
     )
     await ctx.channel.send(ctx.message.author.mention)
     await ctx.channel.send(embed=finalMsg)
 
 
 openai.api_key = CHATGPT_API_KEY
+
 
 def chatgpt_response(prompt):
     response = openai.Completion.create(
@@ -76,42 +76,27 @@ async def on_raw_reaction_add(payload):
 
         emoji = payload.emoji.name
 
-        if emoji == '0️⃣':
-            role = discord.utils.get(guild.roles, name="IPS")
+        def rolee(emojii):
+            return {
+                'a': 'Minecraft',
+                'b': 'League of Lasagna',
+                'c': 'Valorant',
+                'd': 'Counter Strike',
+                'e': 'Fortnite',
+                'f': 'Rocket League',
+                'g': 'Yu-Gi-Oh',
+                'h': 'Hearthstone',
+                'i': 'Need for Speed',
+                'j': 'FIFA',
+                'k': 'Genshin Impact',
+                'l': 'Mosnter Hunter',
+                'm': 'Albion',
+                'n': 'New World',
+                'o': 'Lost Ark',
+                'p': 'World of Warcraft'
+            }.get(emojii, '')
 
-        if emoji == '0️⃣0️⃣':
-            role = discord.utils.get(guild.roles, name="IST")
-
-        if emoji == '0️⃣1️⃣':
-            role = discord.utils.get(guild.roles, name="Minecraft")
-
-        if emoji == '0️⃣2️⃣':
-            role = discord.utils.get(guild.roles, name="LOL")
-
-        if emoji == '0️⃣3️⃣':
-            role = discord.utils.get(guild.roles, name="Fortnite")
-
-        if emoji == '0️⃣4️⃣':
-            role = discord.utils.get(guild.roles, name="Genshin Impact")
-
-        if emoji == '0️⃣5️⃣':
-            role = discord.utils.get(guild.roles, name="Valorant")
-
-        if emoji == '0️⃣6️⃣':
-            role = discord.utils.get(guild.roles, name="Yu-gi-oh")  
-            
-        if emoji == '0️⃣7️⃣':
-            role = discord.utils.get(guild.roles, name="Rocket League")  
-            
-        if emoji == '0️⃣8️⃣':
-            role = discord.utils.get(guild.roles, name="")  
-            
-        if emoji == '0️⃣9️⃣':
-            role = discord.utils.get(guild.roles, name="")  
-            
-        if emoji == '1️⃣0️⃣':
-            role = discord.utils.get(guild.roles, name="")  
-      
+        role = discord.utils.get(guild.roles, name=rolee(emoji))
         await member.add_roles(role)
         role = discord.utils.get(guild.roles, name="Gamer")
         await member.add_roles(role)
@@ -119,31 +104,31 @@ async def on_raw_reaction_add(payload):
 
 @bot.command(pass_context=True)
 async def roles(ctx):
-
-    emojis = ['0️⃣1️⃣', '0️⃣2️⃣', '0️⃣3️⃣', '0️⃣4️⃣', '0️⃣5️⃣', '0️⃣6️⃣', '0️⃣7️⃣']
+    emojis = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p']
 
     embed = discord.Embed(
         title="Escolhe aqui as tuas roles de jogos (Não cliques no nome, pois vais adorar)",
         description='''
-        01- Minecraft
-        02- League of Lasagna
-        03- Valorant
-        04- Fortnite
-        06- Rocket League
-        07- Yu-Gi-Oh
-        08- Hearthstone
-        09- Need for Speed
-        10- FIFA
-        11- Genshin Impact
-        12- Mosnter Hunter
-        13- Albion
-        14- New World
-        15- Lost Ark
-        16- World of Warcraft
+        a: Minecraft
+        b: League of Lasagna
+        c: Valorant
+        d: Counter Strike
+        e: Fortnite
+        f: Rocket League
+        g: Yu-Gi-Oh
+        h: Hearthstone
+        i: Need for Speed
+        j: FIFA
+        k: Genshin Impact
+        l: Mosnter Hunter
+        m: Albion
+        n: New World
+        o: Lost Ark
+        p: World of Warcraft
         ''',
-        url = 'https://www.youtube.com/watch?v=Yt6PPkTDsWg',
-        color = 16677215
-    )# M4-people  M8+/-people
+        url='https://www.youtube.com/watch?v=Yt6PPkTDsWg',
+        color=16677215
+    )  # M4-people  M8+/-people
     msg = await ctx.channel.send(embed=embed)
 
     for i in range(len(emojis)):
@@ -153,6 +138,7 @@ async def roles(ctx):
 @tasks.loop(seconds=20)
 async def change_status():
     await bot.change_presence(activity=discord.Game(choice(status)))
+
 
 keep_alive()
 bot.run(TOKEN)
