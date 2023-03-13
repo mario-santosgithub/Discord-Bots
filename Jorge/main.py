@@ -85,7 +85,7 @@ async def roles(ctx):
     gameRoles.callback = callbackGames
 
     uniRoles = Button(label="Universidade", style=discord.ButtonStyle.blurple)
-    
+    uniRoles.callback = callbackUni
 
     view = View(timeout=None)
     view.add_item(gameRoles)
@@ -96,23 +96,23 @@ async def roles(ctx):
 async def callbackGames(interaction):
     
     select = Select(options=[
-        discord.SelectOption(label="Minecraft", value="01", description="This will open"),
-        discord.SelectOption(label="League of Lasagna", value="02", description="This will open2"),
-        discord.SelectOption(label="Valorant", value="03", description="This will open2"),
-        discord.SelectOption(label="Counter Strike", value="04", description="This will open2"),
-        discord.SelectOption(label="Fortnite", value="05", description="This will open2"),
-        discord.SelectOption(label="Rocket League", value="06", description="This will open2"),
-        discord.SelectOption(label="Yu-Gi-Oh", value="07", description="This will open2"),
-        discord.SelectOption(label="HearthStone", value="08", description="This will open2"),
-        discord.SelectOption(label="Need For Speed", value="09", description="This will open2"),
-        discord.SelectOption(label="FIFA", value="10", description="This will open2"),
-        discord.SelectOption(label="Genshin Impact", value="11", description="This will open2"),
-        discord.SelectOption(label="Monster Hunter", value="12", description="This will open2"),
-        discord.SelectOption(label="Albion", value="13", description="This will open2"),
-        discord.SelectOption(label="New World", value="14", description="This will open2"),
-        discord.SelectOption(label="Lost Ark", value="15", description="This will open2"),
-        discord.SelectOption(label="World Of Warcraft", value="16", description="This will open2"),
-        discord.SelectOption(label="Stradew Valley", value="17", description="This will open2")
+        discord.SelectOption(label="Minecraft", value="01", description="Role de Minecraft"),
+        discord.SelectOption(label="League of Lasagna", value="02", description="Role de LOL"),
+        discord.SelectOption(label="Valorant", value="03", description="Role de Valorant"),
+        discord.SelectOption(label="Counter Strike", value="04", description="Role de CS"),
+        discord.SelectOption(label="Fortnite", value="05", description="Role de Fortnite"),
+        discord.SelectOption(label="Rocket League", value="06", description="Role de Rocket League"),
+        discord.SelectOption(label="Yu-Gi-Oh", value="07", description="Role de Yu-gi-oh"),
+        discord.SelectOption(label="HearthStone", value="08", description="Role de HearthStone"),
+        discord.SelectOption(label="Need For Speed", value="09", description="Role de Need for Speed"),
+        discord.SelectOption(label="FIFA", value="10", description="Role de FIFA"),
+        discord.SelectOption(label="Genshin Impact", value="11", description="Role de Genshin Impact"),
+        discord.SelectOption(label="Monster Hunter", value="12", description="Role de Monster Hunter"),
+        discord.SelectOption(label="Albion", value="13", description="Role de Albion"),
+        discord.SelectOption(label="New World", value="14", description="Role de New World"),
+        discord.SelectOption(label="Lost Ark", value="15", description="Role de Lost Ark"),
+        discord.SelectOption(label="World Of Warcraft", value="16", description="Role de World of Warcraft"),
+        discord.SelectOption(label="Stradew Valley", value="17", description="Role de Stardey Valley")
     ])  
 
 
@@ -133,7 +133,30 @@ async def callbackGames(interaction):
     await interaction.response.send_message("Escolhe uma opção", view=view, ephemeral=True)
 
 
-    return
+async def callbackUni(interaction):
+    
+    select = Select(options=[
+        discord.SelectOption(label="IPS-LEI", value="18", description="Role de IPS-LEI"),
+        discord.SelectOption(label="IST-LEIC", value="19", description="Role IST-LEIC"),
+    ])  
+
+
+    async def newCallbackGames(interaction):
+        member = interaction.user    
+        guild = member.guild
+
+        newRole = rolesList.get(select.values[0])
+        role = discord.utils.get(guild.roles, name=newRole)
+
+        await member.add_roles(role)
+        await interaction.response.send_message("Já está :D", ephemeral=True)
+
+    
+    select.callback = newCallbackGames
+    view = View(timeout=None)
+    view.add_item(select)
+    await interaction.response.send_message("Escolhe uma opção", view=view, ephemeral=True)
+
 
 '''
 Change the status 
