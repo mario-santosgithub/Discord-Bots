@@ -14,7 +14,7 @@ Calls the openAI search and returns an answer.
 ```
 
 ### roles
-Sets the roles message to select with emojis, some internal stuff needs to be modified.
+Displays a lot of options so that the user can choose their roles.
 ```s
 !roles
 ```
