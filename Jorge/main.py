@@ -142,7 +142,10 @@ async def callbackGames(interaction):
                          value="16",
                          description="Role de World of Warcraft"),
     discord.SelectOption(
-      label="Stradew Valley", value="17", description="Role de Stardey Valley")
+      label="Stradew Valley", value="17", description="Role de Stardey Valley"),
+    discord.SelectOption(label="Honkai: Star Rail",
+                         value="20",
+                         description="Role de Honkai: Star Rail")
   ])
 
   async def newCallbackGames(interaction):
