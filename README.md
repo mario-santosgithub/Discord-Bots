@@ -7,12 +7,6 @@ The code is all free :D
 
 ## Commands
 
-### ai
-Calls the openAI search and returns an answer.
-```s
-!ai <<Message>> 
-```
-
 ### roles
 Displays a lot of options so that the user can choose their roles.
 ```s
